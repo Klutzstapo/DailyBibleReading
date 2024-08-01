@@ -36,7 +36,7 @@ function parseCSV(data) {
 }
 
 function fetchBibleVerse(boxId, reference) {
-    const apiKey = 'YOUR_API_BIBLE_KEY'; // Replace with your API.Bible key
+    const apiKey = 'b730d029f8d85da0dc693dbfa3a9e88e'; // Replace with your API.Bible key
     const apiUrl = `https://api.scripture.api.bible/v1/bibles/YOUR_BIBLE_ID/passages/${reference}?content-type=text`;
 
     fetch(apiUrl, {
