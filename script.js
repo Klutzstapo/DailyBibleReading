@@ -10,14 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const readings = parseCSV(data);
             const todayReadings = readings.find(row => row.date === formattedDate);
             if (todayReadings) {
-                fetchBibleVerse('torah', todayReadings.torah);
-                fetchBibleVerse('history', todayReadings.history);
-                fetchBibleVerse('prophets', todayReadings.prophets);
-                fetchBibleVerse('proverbs', todayReadings.proverbs);
-                fetchBibleVerse('psalms', todayReadings.psalms);
-                fetchBibleVerse('gospel', todayReadings.gospel);
-                fetchBibleVerse('epistles', todayReadings.epistles);
-                fetchBibleVerse('revelation', todayReadings.revelation);
+                fetchBibleChapter('torah', todayReadings.torah);
+                fetchBibleChapter('history', todayReadings.history);
+                fetchBibleChapter('prophets', todayReadings.prophets);
+                fetchBibleChapter('proverbs', todayReadings.proverbs);
+                fetchBibleChapter('psalms', todayReadings.psalms);
+                fetchBibleChapter('gospel', todayReadings.gospel);
+                fetchBibleChapter('epistles', todayReadings.epistles);
+                fetchBibleChapter('revelation', todayReadings.revelation);
             }
         });
 });
@@ -35,9 +35,10 @@ function parseCSV(data) {
     });
 }
 
-function fetchBibleVerse(boxId, reference) {
+function fetchBibleChapter(boxId, reference) {
     const apiKey = 'b730d029f8d85da0dc693dbfa3a9e88e'; // Replace with your API.Bible key
-    const apiUrl = `https://api.scripture.api.bible/v1/bibles/YOUR_BIBLE_ID/passages/${reference}?content-type=text`;
+    const bibleId = 'de4e12af7f28f599-01'; // Replace with the specific Bible version ID
+    const apiUrl = `https://api.scripture.api.bible/v1/bibles/${bibleId}/chapters/${reference}`;
 
     fetch(apiUrl, {
         headers: {
@@ -46,8 +47,8 @@ function fetchBibleVerse(boxId, reference) {
     })
     .then(response => response.json())
     .then(data => {
-        const verseText = data.data.content;
-        document.querySelector(`#${boxId} .verse`).innerHTML = verseText;
+        const chapterText = data.data.content;
+        document.querySelector(`#${boxId} .verse`).innerHTML = chapterText;
     })
-    .catch(error => console.error('Error fetching Bible verse:', error));
+    .catch(error => console.error('Error fetching Bible chapter:', error));
 }
