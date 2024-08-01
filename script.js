@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formattedDate = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     currentDateElement.textContent = formattedDate;
 
-    fetch('bible_readings.csv')
+    fetch('reading_plan.csv')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
